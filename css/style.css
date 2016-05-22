@@ -1,0 +1,115 @@
+/* YOUR CUSTOM STYLES */
+
+body {
+    margin-top: 80px;
+    background-color: #e5e5e5;
+}
+
+.background-header {
+    color: #454545;
+    padding-left: 15px;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.contacts-table {
+    background-color: #ffffff;
+}
+
+.profile-picture {
+    background-color: #2294d2;
+    border-radius: 50%;
+}
+
+.profile-picture-default {
+}
+
+.profile-picture-small {
+    width: 32px;
+    height: 32px;
+}
+
+.profile-picture-medium {
+    width: 64px;
+    height: 64px;
+}
+
+.profile-picture-large {
+    width: 180px;
+    height: 180px;
+}
+
+.contacts-table td {
+    vertical-align: middle;
+}
+
+add-button {
+    background-color: #D32F2F;
+    border-radius: 50%;
+    height: 4em;
+    position: relative;
+    width: 4em;
+    z-index: 1000;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
+}
+
+
+
+.floatingContainer {
+    bottom: 2em;
+    position: fixed;
+    right: 2em;
+}
+
+.floatingText {
+    background-color: #212121;
+    border-radius: 0.19em;
+    color: #FFF;
+    display: inherit;
+    font-family: 'Roboto';
+    font-size: 0.8em;
+    font-weight: 300;
+    min-width: 15em;
+    padding: 1em 2em;
+    position: relative;
+    text-align: left;
+}
+
+.actionButton {
+    background-color: #D32F2F;
+    border-radius: 50%;
+    height: 64px;
+    position: relative;
+    width: 64px;
+    z-index: 1000;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
+}
+
+    .actionButton:before {
+        content: '\f234';
+        color: #FFF;
+        position: absolute;
+        margin-top: 13px;
+        margin-left: 21px;
+        opacity: 1;
+        font-size: 26px;
+        font-family: 'FontAwesome';
+    }
+
+    .actionButton:hover {
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.14), 0 8px 16px rgba(0, 0, 0, 0.28);
+    }
+
+.text-right {
+    text-align: right;
+}
+
+#contact-form .container {
+    padding: 30px;
+    width: 750px;
+    background-color: #e5e5e5;
+}
+
+#contact-form h4 {
+    margin-top: 10px;
+}
