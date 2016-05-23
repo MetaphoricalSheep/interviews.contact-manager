@@ -142,6 +142,48 @@ class BaseModel
         return $this;
     }
 
+    /**
+     * @param array $clauses
+     * @return array
+     */
+    public static function where($clauses)
+    {
+        $list = [];
+        $db = \Database::getInstance();
+        
+        $qry = sprintf('SELECT * FROM %s WHERE ', self::getTableName());
+        $params = [];
+        
+        foreach ($clauses as $field=>$data)
+        {
+            $joiner = empty($data['joiner']) ? 'AND' : $data['joiner'];
+            $operator = empty($data['operator']) ? '=' : $data['operator'];
+            $value = empty($data['value']) ? NULL : $data['value'];
+            
+            if (sizeof($params) == 0)
+            {
+                $qry .= sprintf(" %s %s ?", $field, $operator);
+            }
+            else
+            {
+                $qry .= sprintf(" %s %s %s ?", $joiner, $field, $operator);
+            }
+            
+            $params[] = $value;
+        }
+        
+        $stmt = $db->prepare($qry);
+        $stmt->execute($params);
+
+        foreach($stmt->fetchAll(\PDO::FETCH_ASSOC) as $row)
+        {
+            $class = self::getClass();
+            $list[$row['id']] = new $class($row);
+        }
+
+        return $list;
+    }
+
     private static function getTableName()
     {
         if (empty(self::$table))

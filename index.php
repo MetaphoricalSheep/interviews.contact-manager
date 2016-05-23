@@ -17,12 +17,4 @@ spl_autoload_register(function ($class_name)
     }
 });
 
-if (isset($_GET['controller']) && isset($_GET['action'])) {
-    $controller = $_GET['controller'];
-    $action     = $_GET['action'];
-} else {
-    $controller = 'contacts';
-    $action     = 'index';
-}
-
 require_once 'views/layout.php';

@@ -10,6 +10,7 @@ class ContactsController extends Controller
     {
         $contacts = ContactsModel::getAll();
         $favorites = ContactsModel::getBy('favorite', 1);
+        $nav = 'contacts';
         require_once 'views/contacts/index.php';
     }
 
@@ -68,5 +69,39 @@ class ContactsController extends Controller
      */
     public function search($keyword)
     {
+        $key = '%' . $keyword . '%';
+        
+        $contacts = ContactsModel::where(
+            [
+                'name' => [
+                    'joiner' => 'OR',
+                    'operator' => 'LIKE',
+                    'value' => $key
+                ],
+                'email' => [
+                    'joiner' => 'OR',
+                    'operator' => 'LIKE',
+                    'value' => $key
+                ],
+                'phone' => [
+                    'joiner' => 'OR',
+                    'operator' => 'LIKE',
+                    'value' => $key
+                ],
+            ]
+        );
+
+        $nav = 'contacts';
+        require_once 'views/contacts/index.php';
+    }
+
+    /**
+     * Display only favorite contacts
+     */
+    public function favorites()
+    {
+        $favorites = ContactsModel::getBy('favorite', 1);
+        $nav = 'favorites';
+        require_once 'views/contacts/index.php';
     }
 }

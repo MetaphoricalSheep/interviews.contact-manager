@@ -56,6 +56,5 @@
 <script type="text/javascript" src="<?php echo $js; ?>"></script>
 <?php } ?>
 
-
 </body>
 </html>

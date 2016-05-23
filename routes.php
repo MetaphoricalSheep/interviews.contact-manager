@@ -30,6 +30,19 @@ $router->with('/contacts', function () use ($router, $contactsController)
     {
         $contactsController->favorite($request->id);
     });
+    
+    $router->respond('GET', '/[:keyword]', function($request) use ($contactsController)
+    {
+        $contactsController->search($request->keyword);
+    });
+});
+
+$router->with('/favorites', function () use ($router, $contactsController)
+{
+    $router->respond('GET', '/?', function($request) use ($contactsController)
+    {
+        $contactsController->favorites();
+    });
 });
 
 $router->respond('404', function ($request) use ($contactsController) {
