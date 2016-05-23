@@ -25,6 +25,11 @@ $router->with('/contacts', function () use ($router, $contactsController)
     {
         $contactsController->postContact($request->paramsPost());
     });
+    
+    $router->respond('GET', '/[:id]/favorite', function($request) use ($contactsController)
+    {
+        $contactsController->favorite($request->id);
+    });
 });
 
 $router->respond('404', function ($request) use ($contactsController) {

@@ -7,7 +7,7 @@
     <td><?php echo $contact->email; ?></td>
     <td><?php echo $contact->phone; ?></td>
     <td>
-        <a href="#" class="text-warning"><i class="fa fa-heart-o"></i></a>
+        <a href="javascript:void(0);" data-id="<?php echo $contact->id; ?>" class="favorite-contact text-warning"><i class="fa fa-heart-o"></i></a>
         <a class="edit-contact" data-id="<?php echo $contact->id; ?>" data-name="<?php echo $contact->name; ?> "data-photo="<?php echo $contact->photo; ?>" data-email="<?php echo $contact->email; ?>" data-phone="<?php echo $contact->phone; ?>" href="javascript:void(0);" data-toggle="modal" data-target="#contact-form">
             <i class="fa fa-pencil"></i>
         </a>

@@ -45,4 +45,14 @@ class ContactsController extends Controller
         $contact->save();
         $this->redirect('/contacts');
     }
+
+    /**
+     * Toggle the favorite status of a contact
+     * 
+     * @param int $id
+     */
+    public function favorite($id)
+    {
+        die('hit');
+    }
 }
