@@ -10,12 +10,18 @@ class ContactsModel extends BaseModel
     public $phone;
     public $photo;
 
-    function __construct($id=null, $name=null, $email=null, $phone=null, $photo=null)
+    /**
+     * ContactsModel constructor.
+     *
+     * @param array $row
+     */
+    public function __construct(array $row)
     {
-        $this->id = $id;
-        $this->name = $name;
-        $this->email = $email;
-        $this->phone = $phone;
-        $this->photo = $photo;
+        parent::__construct($row);
+        
+        if (empty($this->photo))
+        {
+            $this->photo = "/img/default_profile.png";
+        }
     }
 }

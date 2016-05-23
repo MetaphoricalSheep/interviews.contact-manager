@@ -4,6 +4,24 @@ namespace models;
 
 class BaseModel
 {
+    protected static $table;
+    protected static $class;
+    protected $fields = [];
+
+    /**
+     * Constructor.
+     *
+     * @param array $row
+     */
+    public function __construct($row)
+    {
+        foreach ($row as $field=>$val)
+        {
+            $this->fields[] = $field;
+            $this->{$field} = $val;
+        }
+    }
+
     /**
      * Fetches all records from db
      * 
@@ -13,11 +31,12 @@ class BaseModel
     {
         $list = [];
         $db = \Database::getInstance();
-        $stmt = $db->query('SELECT * FROM contacts');
-
-        foreach($stmt->fetchAll() as $contact) 
+        $stmt = $db->query(sprintf('SELECT * FROM %s', self::getTableName()));
+        
+        foreach($stmt->fetchAll() as $row)
         {
-            $list[] = new ContactsModel($contact->id, $contact->name, $contact->email, $contact->phone, $contact->photo);
+            $class = self::getClass();
+            $list[$row['id']] = new $class($row);
         }
 
         return $list;
@@ -27,19 +46,20 @@ class BaseModel
      * Fetches a specific record from db
      *
      * @param int $id   The primary key of the record
-     * @return ContactsModel
+     * @return BaseModel
      */
     public static function find($id)
     {
         $db = \Database::getInstance();
         $id = intval($id);
-        $stmt = $db->prepare('SELECT * FROM contacts WHERE id=:id LIMIT 1');
+        $stmt = $db->prepare(sprintf('SELECT * FROM %s WHERE id=:id LIMIT 1', self::getTableName()));
         $stmt->bindParam('id', $id);
         $stmt->execute();
 
-        $contact = $stmt->fetch();
+        $result = $stmt->fetch();
 
-        return new ContactsModel($contact->id, $contact->name, $contact->email, $contact->phone, $contact->photo);
+        $class = self::getClass();
+        return new $class($result);
     }
 
     /**
@@ -53,15 +73,90 @@ class BaseModel
     {
         $list = [];
         $db = \Database::getInstance();
-        $stmt = $db->prepare(sprintf('SELECT * FROM contacts WHERE %s=:val', $field));
-        $stmt->bindParam('val', $value);
+        $stmt = $db->prepare(sprintf('SELECT * FROM %s WHERE %s=:val', self::getTableName(), $field));
+        $stmt->bindParam(':val', $value);
         $stmt->execute();
         
-        foreach ($stmt->fetchAll() as $contact)
+        foreach ($stmt->fetchAll() as $row)
         {
-            $list[] = new ContactsModel($contact->id, $contact->name, $contact->email, $contact->phone, $contact->photo);
+            $class = self::getClass();
+            $list[$row['id']] = new $class($row);
         }
         
         return $list;
+    }
+
+    public function delete()
+    {
+        if (!empty($this->id))
+        {
+            try
+            {
+                $db   = \Database::getInstance();
+                $stmt = $db->prepare(sprintf('DELETE FROM %s WHERE id=:id', self::getTableName()));
+                $stmt->bindParam(':id', $this->id);
+                $stmt->execute();
+            }
+            catch (\Exception $e)
+            {
+                return FALSE;
+            }
+        }
+        
+        return TRUE;
+    }
+    
+    public function save()
+    {
+        $action = (empty($this->id)) ? "INSERT INTO" : "UPDATE";
+        $table = $this->getTableName();
+        $qry = "$action $table SET ";
+        $params = [];
+        $fields = [];
+
+        foreach ($this->fields as $field)
+        {
+            $fields[] = "$field = ?";
+            $params[] = (empty($this->{$field})) ? NULL : $this->{$field};
+        }
+        
+        $qry .= implode(', ', $fields);
+        
+        try
+        {
+            $db   = \Database::getInstance();
+            $stmt = $db->prepare($qry);
+            $stmt->execute($params);
+
+            $this->id = $db->lastInsertId();
+        }
+        catch (\Exception $e)
+        {
+            die($e->getMessage());
+        }
+        
+        return $this;
+    }
+
+    private static function getTableName()
+    {
+        if (empty(self::$table))
+        {
+            $class = explode('\\', get_called_class());
+            $class = array_pop($class);
+            self::$table = stripslashes(strtolower(str_replace('Model', '', $class)));
+        }
+        
+        return self::$table;
+    }
+    
+    private static function getClass()
+    {
+        if (empty(self::$class))
+        {
+            self::$class = get_called_class();
+        }
+        
+        return self::$class;
     }
 }
