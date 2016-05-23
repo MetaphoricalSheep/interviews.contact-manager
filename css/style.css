@@ -13,6 +13,7 @@ body {
 }
 
 .contacts-table {
+    font-size: 15px;
     background-color: #ffffff;
 }
 
@@ -112,4 +113,10 @@ add-button {
 
 #contact-form h4 {
     margin-top: 10px;
+}
+
+.no-contacts {
+    font-size: 14px;
+    color: #454545;
+    text-align: center;
 }

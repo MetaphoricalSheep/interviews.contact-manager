@@ -13,38 +13,48 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Material Design Bootstrap -->
-    <link href="css/mdb.min.css" rel="stylesheet">
+    <link href="/css/mdb.min.css" rel="stylesheet">
 
     <!-- Your custom styles (optional) -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
 </head>
 
 <body>
 
-
 <!-- Start your project here-->
+<?php $inc_js = []; ?>
 <?php require_once 'views/header.php'; ?>
-<?php require_once 'routes.php'; ?>
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <?php require_once 'routes.php'; ?>
+        </div>
+    </div>
+</main>
 <!-- /Start your project here-->
 
 
 <!-- SCRIPTS -->
 
 <!-- JQuery -->
-<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="/js/jquery-2.2.3.min.js"></script>
 
 <!-- Bootstrap tooltips -->
-<script type="text/javascript" src="js/tether.min.js"></script>
+<script type="text/javascript" src="/js/tether.min.js"></script>
 
 <!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 
 <!-- MDB core JavaScript -->
-<script type="text/javascript" src="js/mdb.min.js"></script>
+<script type="text/javascript" src="/js/mdb.min.js"></script>
+
+<?php foreach ($inc_js as $js) { ?>
+<script type="text/javascript" src="<?php echo $js; ?>"></script>
+<?php } ?>
 
 
 </body>
