@@ -1,28 +1,34 @@
 <?php
 
-function call($controller, $action)
+$router = new \Klein\Klein();
+
+$contactsController = new \controllers\ContactsController();
+
+$router->respond('/', function ($request, $response)
 {
-    $controller = 'controllers\\' . ucfirst(strtolower($controller)) . 'Controller';
-    
-    if (!class_exists($controller))
-    {
-        $controller = new \controllers\Controller();
-        $controller->error_404();
+    $response->redirect('/contacts', 302);
+});
 
-        return;
-    }
-    
-    $controller = new $controller();
-    
-    // call the action
-    if (!method_exists($controller, $action))
+$router->with('/contacts', function () use ($router, $contactsController) 
+{
+    $router->respond('GET', '/?', function($request) use ($contactsController)
     {
-        $controller->error_404();
-        
-        return;
-    }
+        $contactsController->index();
+    });
     
-    $controller->{ $action }();
-}
+    $router->respond('GET', '/[:id]/delete', function($request) use ($contactsController)
+    {
+        $contactsController->deleteContact($request->id);
+    });
 
-call($controller, $action);
+    $router->respond('POST', '/?', function($request) use ($contactsController)
+    {
+        $contactsController->postContact($request->paramsPost());
+    });
+});
+
+$router->respond('404', function ($request) use ($contactsController) {
+    $contactsController->error_404();
+});
+
+$router->dispatch();
