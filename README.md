@@ -21,5 +21,5 @@ You will need the following things properly installed on your computer.
 ## Running
 
 * `cd path/to/project/contact_manager` cd into the project directory
-* `php -S <ip>:8000` start up the php development server. Ip can either be localhost or your public facing ip
-*  Open Chrome and point it to <ip>:8000
+* `php -S [ip]:8000` start up the php development server. Ip can either be localhost or your public facing ip
+*  Open Chrome and point it to [ip]:8000
