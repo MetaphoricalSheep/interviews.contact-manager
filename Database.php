@@ -4,7 +4,7 @@ class Database {
     private static $instance = NULL;
     
     private static $user = 'root';
-    private static $password = '';
+    private static $password = '86AhFf8NOI64J2UT33093aMlM';
     private static $host = 'localhost';
     private static $db = 'contact_manager';
 
