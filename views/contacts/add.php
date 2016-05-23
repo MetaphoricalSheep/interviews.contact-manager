@@ -27,7 +27,7 @@
                                 </div>
 
                                 <div class="md-form">
-                                    <i class="fa fa-envelope prefix"></i>
+                                    <i class="fa fa-user prefix"></i>
                                     <input type="text" id="contact-form-name" name="name" class="form-control">
                                     <label for="contact-form-name">Add a name</label>
                                 </div>
@@ -38,7 +38,7 @@
                                 </div>
 
                                 <div class="md-form">
-                                    <i class="fa fa-lock prefix"></i>
+                                    <i class="fa fa-phone prefix"></i>
                                     <input type="text" id="contact-form-phone" name="phone" class="form-control">
                                     <label for="contact-form-phone">Add a phone</label>
                                 </div>

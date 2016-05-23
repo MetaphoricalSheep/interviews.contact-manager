@@ -2,6 +2,11 @@
 
 class Database {
     private static $instance = NULL;
+    
+    private static $user = 'root';
+    private static $password = '';
+    private static $host = 'localhost';
+    private static $db = 'contact_manager';
 
     private function __construct() {}
 
@@ -14,7 +19,7 @@ class Database {
     {
         if (!isset(self::$instance)) {
             $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-            self::$instance = new PDO('mysql:host=localhost;dbname=contact_manager', 'root', '86AhFf8NOI64J2UT33093aMlM', $pdo_options);
+            self::$instance = new PDO(sprintf('mysql:host=%s;dbname=%s', self::$host, self::$db), self::$user, self::$password, $pdo_options);
         }
         
         return self::$instance;
