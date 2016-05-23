@@ -9,6 +9,7 @@ class ContactsModel extends BaseModel
     public $email;
     public $phone;
     public $photo;
+    public $favorite;
 
     /**
      * ContactsModel constructor.
@@ -23,5 +24,14 @@ class ContactsModel extends BaseModel
         {
             $this->photo = "/img/default_profile.png";
         }
+    }
+
+    /**
+     * @param int $id
+     * @return ContactsModel
+     */
+    public static function find($id)
+    {
+        return parent::find($id);
     }
 }

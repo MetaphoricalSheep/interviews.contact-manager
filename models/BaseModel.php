@@ -33,7 +33,7 @@ class BaseModel
         $db = \Database::getInstance();
         $stmt = $db->query(sprintf('SELECT * FROM %s', self::getTableName()));
         
-        foreach($stmt->fetchAll() as $row)
+        foreach($stmt->fetchAll(\PDO::FETCH_ASSOC) as $row)
         {
             $class = self::getClass();
             $list[$row['id']] = new $class($row);
@@ -56,7 +56,7 @@ class BaseModel
         $stmt->bindParam('id', $id);
         $stmt->execute();
 
-        $result = $stmt->fetch();
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
 
         $class = self::getClass();
         return new $class($result);
@@ -77,7 +77,7 @@ class BaseModel
         $stmt->bindParam(':val', $value);
         $stmt->execute();
         
-        foreach ($stmt->fetchAll() as $row)
+        foreach ($stmt->fetchAll(\PDO::FETCH_ASSOC) as $row)
         {
             $class = self::getClass();
             $list[$row['id']] = new $class($row);
@@ -117,11 +117,14 @@ class BaseModel
 
         foreach ($this->fields as $field)
         {
-            $fields[] = "$field = ?";
-            $params[] = (empty($this->{$field})) ? NULL : $this->{$field};
+            if ($field != 'id') 
+            {
+                $fields[] = "$field = ?";
+                $params[] = (empty($this->{$field})) ? NULL : $this->{$field};
+            }
         }
         
-        $qry .= implode(', ', $fields) . $where;
+        $qry .= implode(', ', $fields) . ' ' . $where;
         
         try
         {

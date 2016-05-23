@@ -9,6 +9,7 @@ class ContactsController extends Controller
     public function index()
     {
         $contacts = ContactsModel::getAll();
+        $favorites = ContactsModel::getBy('favorite', 1);
         require_once 'views/contacts/index.php';
     }
 
@@ -29,7 +30,7 @@ class ContactsController extends Controller
      */
     public function postContact($post)
     {
-        $contact = new \models\ContactsModel(
+        $contact = new ContactsModel(
             [
                 'name' => $post['name'],
                 'email' => $post['email'],
@@ -53,6 +54,19 @@ class ContactsController extends Controller
      */
     public function favorite($id)
     {
-        die('hit');
+	    $contact = ContactsModel::find($id);
+        $contact->favorite = ($contact->favorite) ? FALSE : TRUE;
+        $contact->save();
+        
+        $this->redirect('/contacts');
+    }
+
+    /**
+     * Search contacts
+     * 
+     * @param string $keyword
+     */
+    public function search($keyword)
+    {
     }
 }

@@ -23,4 +23,5 @@
 global $inc_js; 
 $inc_js[] = "/js/contacts/delete.js";
 $inc_js[] = "/js/contacts/add.js"; 
+$inc_js[] = "/js/contacts/favorite.js"; 
 ?>

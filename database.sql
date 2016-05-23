@@ -5,6 +5,7 @@ CREATE TABLE `contact_manager`.`contacts` (
       `email` VARCHAR(255) NULL,
       `phone` VARCHAR(12) NULL,
       `photo` VARCHAR(255) NULL,
+      `favorite` BOOLEAN(255) NULL,
       PRIMARY KEY (`id`)
 );
 
