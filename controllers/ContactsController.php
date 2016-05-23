@@ -36,6 +36,12 @@ class ContactsController extends Controller
                 'phone' => $post['phone'],
             ]
         );
+        
+        if (!empty($post['id'])) 
+        {
+            $contact->id = $post['id'];
+        }
+        
         $contact->save();
         $this->redirect('/contacts');
     }

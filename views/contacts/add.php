@@ -15,6 +15,7 @@
                     <div class="card">
                         <div class="card-block">
                             <form action="/contacts" method="post">
+                                <input type="hidden" id="contact-form-id" name="id" />
                                 <div class="row">
                                     <div class="col-md-5">
                                         <h4 class="card-title">Edit Contact</h4>

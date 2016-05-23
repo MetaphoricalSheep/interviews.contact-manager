@@ -19,4 +19,8 @@
     </div>
 </div>
 
-<?php global $inc_js; $inc_js[] = "/js/contacts/delete.js"; ?>
+<?php 
+global $inc_js; 
+$inc_js[] = "/js/contacts/delete.js";
+$inc_js[] = "/js/contacts/add.js"; 
+?>

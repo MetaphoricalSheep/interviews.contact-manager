@@ -109,6 +109,7 @@ class BaseModel
     public function save()
     {
         $action = (empty($this->id)) ? "INSERT INTO" : "UPDATE";
+        $where = (empty($this->id)) ? "" : sprintf("WHERE id = %s", $this->id);
         $table = $this->getTableName();
         $qry = "$action $table SET ";
         $params = [];
@@ -120,7 +121,7 @@ class BaseModel
             $params[] = (empty($this->{$field})) ? NULL : $this->{$field};
         }
         
-        $qry .= implode(', ', $fields);
+        $qry .= implode(', ', $fields) . $where;
         
         try
         {
