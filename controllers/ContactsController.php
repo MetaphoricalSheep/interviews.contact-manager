@@ -45,10 +45,10 @@ class ContactsController extends Controller
             $contact->id = $post['id'];
         }
 
-        $targetDir = "/img/photos/";
+        $targetDir = "img/photos/";
         $targetFile = $targetDir . basename($_FILES["photo"]["name"]);
         $imageFileType = pathinfo($targetFile, PATHINFO_EXTENSION);
-
+        
         $check = getimagesize($_FILES["photo"]["tmp_name"]);
         if($check !== false)
         {
@@ -57,7 +57,7 @@ class ContactsController extends Controller
             {
                 if (move_uploaded_file($_FILES['photo']['tmp_name'], $targetFile)) 
                 {
-                    $contact->photo = $targetFile;
+                    $contact->photo = '/' . $targetFile;
                 }
             }
         }
