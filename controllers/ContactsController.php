@@ -8,7 +8,7 @@ class ContactsController extends Controller
 {
     public function index()
     {
-        $contacts = ContactsModel::getAll();
+        $contacts = ContactsModel::getAll(['field' => 'name']);
         $favorites = ContactsModel::getBy('favorite', 1);
         $nav = 'contacts';
         require_once 'views/contacts/index.php';
@@ -36,12 +36,30 @@ class ContactsController extends Controller
                 'name' => $post['name'],
                 'email' => $post['email'],
                 'phone' => $post['phone'],
+                'photo' => null,
             ]
         );
         
         if (!empty($post['id'])) 
         {
             $contact->id = $post['id'];
+        }
+
+        $targetDir = "/img/photos/";
+        $targetFile = $targetDir . basename($_FILES["photo"]["name"]);
+        $imageFileType = pathinfo($targetFile, PATHINFO_EXTENSION);
+
+        $check = getimagesize($_FILES["photo"]["tmp_name"]);
+        if($check !== false)
+        {
+
+            if( $imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg")
+            {
+                if (move_uploaded_file($_FILES['photo']['tmp_name'], $targetFile)) 
+                {
+                    $contact->photo = $targetFile;
+                }
+            }
         }
         
         $contact->save();

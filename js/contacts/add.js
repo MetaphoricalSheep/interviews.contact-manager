@@ -17,7 +17,8 @@
          }
          
          if (photo && photo != '/img/default_profile.png') {
-             $('#contact-form-photo').val(photo).siblings('i, label').addClass('active');
+             $('#upload-file-info').text(photo);
+             $('#contact-form-photo-display').attr('src', photo);
          }
          
          if (email) {
@@ -29,7 +30,11 @@
          }
      });
 
-     $('#delete-modal').on('hidden.bs.modal', function () {
-         /*clear form*/
+     $('#contact-form').on('hidden.bs.modal', function () {
+         $('#contact-form-name').val('').siblings('i, label').removeClass('active');
+         $('#contact-form-email').val('').siblings('i, label').removeClass('active');
+         $('#contact-form-phone').val('').siblings('i, label').removeClass('active');
+         $('#upload-file-info').text('');
+         $('#contact-form-photo-display').attr('src', '/img/default_profile.png');
      })
  });

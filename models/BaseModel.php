@@ -25,13 +25,26 @@ class BaseModel
     /**
      * Fetches all records from db
      * 
+     * @param array $order
      * @return array
      */
-    public static function getAll()
+    public static function getAll($order = [])
     {
         $list = [];
         $db = \Database::getInstance();
-        $stmt = $db->query(sprintf('SELECT * FROM %s', self::getTableName()));
+        $qry = sprintf('SELECT * FROM %s', self::getTableName());
+        
+        if (!empty($order))
+        {
+            if (!empty($order['field']))
+            {
+                $field = $order['field'];
+                $dir = (empty($order['dir'])) ? 'ASC' : $order['dir'];
+                $qry .= " ORDER BY $field $dir";
+            }
+        }
+        
+        $stmt = $db->query($qry);
         
         foreach($stmt->fetchAll(\PDO::FETCH_ASSOC) as $row)
         {

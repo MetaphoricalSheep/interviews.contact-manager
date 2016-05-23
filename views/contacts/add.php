@@ -9,12 +9,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <img class="profile-picture profile-picture-default profile-picture-large" src="img/default_profile.png" />
+                    <img class="profile-picture profile-picture-default profile-picture-large" id="contact-form-photo-display" src="img/default_profile.png" />
                 </div>
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-block">
-                            <form action="/contacts" method="post">
+                            <form action="/contacts" method="post" enctype="multipart/form-data">
                                 <input type="hidden" id="contact-form-id" name="id" />
                                 <div class="row">
                                     <div class="col-md-5">
@@ -33,11 +33,6 @@
                                 </div>
                                 <div class="md-form">
                                     <i class="fa fa-envelope prefix"></i>
-                                    <input type="text" id="contact-form-photo" name="photo" class="form-control">
-                                    <label for="contact-form-photo">Add a photo</label>
-                                </div>
-                                <div class="md-form">
-                                    <i class="fa fa-envelope prefix"></i>
                                     <input type="text" id="contact-form-email" name="email" class="form-control">
                                     <label for="contact-form-email">Add an email</label>
                                 </div>
@@ -46,6 +41,14 @@
                                     <i class="fa fa-lock prefix"></i>
                                     <input type="text" id="contact-form-phone" name="phone" class="form-control">
                                     <label for="contact-form-phone">Add a phone</label>
+                                </div>
+
+                                <div>
+                                    <label class="btn btn-primary-outline" for="contact-form-photo">
+                                        <input id="contact-form-photo" name="photo" type="file" style="display:none;" onchange="$('#upload-file-info').html($(this).val());">
+                                        Upload photo
+                                    </label>
+                                    <span class='' id="upload-file-info"></span>
                                 </div>
                             </form>
                         </div>
