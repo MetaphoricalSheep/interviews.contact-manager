@@ -12,7 +12,7 @@ You will need the following things properly installed on your computer.
 
 ## Installation
 
-* `git clone git@github.com:PieterUysFourie/contact_manager.git`
+* `git clone https://github.com/PieterUysFourie/contact_manager.git`
 * `cd contact_manager` cd into the new directory
 * `php composer.phar install` install the dependencies
 * `vim Database.php` open the Database.php file and update it with your DB configs
