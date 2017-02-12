@@ -1,6 +1,6 @@
 # Interview Project: Contact Manager
 
-This is a simple contact manager application that I had to do for an interview while applying for a Senior PHP Developer role.
+This is a simple contact manager application that I wrote for a Senior PHP developer interview.
 
 * I used a Bootstrap Material Design theme from [mdbootstrap](https://mdbootstrap.com/) for my styling.
 * I used [Klein](https://github.com/klein/klein.php) as my router.
