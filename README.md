@@ -55,4 +55,3 @@ You will need the following things properly installed on your computer.
 * https://mdbootstrap.com/ - Material Design for Bootstrap
 * https://github.com/klein/klein.php - a fast & flexible router for PHP 5.3+
 * https://getcomposer.org/ - dependency manager for PHP
-* 
