@@ -13,10 +13,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
 
     <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/vendor/bootstrap.min.css" rel="stylesheet">
 
     <!-- Material Design Bootstrap -->
-    <link href="/css/mdb.min.css" rel="stylesheet">
+    <link href="/css/vendor/mdb.min.css" rel="stylesheet">
 
     <!-- Your custom styles (optional) -->
     <link href="/css/style.css" rel="stylesheet">
@@ -41,16 +41,16 @@
 <!-- SCRIPTS -->
 
 <!-- JQuery -->
-<script type="text/javascript" src="/js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="/js/vendor/jquery-2.2.3.min.js"></script>
 
 <!-- Bootstrap tooltips -->
-<script type="text/javascript" src="/js/tether.min.js"></script>
+<script type="text/javascript" src="/js/vendor/tether.min.js"></script>
 
 <!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/vendor/bootstrap.min.js"></script>
 
 <!-- MDB core JavaScript -->
-<script type="text/javascript" src="/js/mdb.min.js"></script>
+<script type="text/javascript" src="/js/vendor/mdb.min.js"></script>
 
 <?php foreach ($inc_js as $js) { ?>
 <script type="text/javascript" src="<?php echo $js; ?>"></script>

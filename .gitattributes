@@ -4,7 +4,8 @@ js/jquery-2.2.3.js linguist-vendored
 js/jquery-2.2.3.min.js linguist-vendored
 js/mdb.js linguist-vendored
 js/mdb.min.js linguist-vendored
-js/tether* linguist-vendored
+js/tether.js linguist-vendored
+js/tether.min.js linguist-vendored
 css/bootstrap.css linguist-vendored
 css/bootstrap.min.css linguist-vendored
 css/mdb.css linguist-vendored
